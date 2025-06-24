@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -20,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _isLoading = false;
 
   // Pega aquí tu API Key de Groq
-  static const String _apiKey = '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';
+  final String? apiKey = dotenv.env['GROQ_API_KEY'];
 
   Future<void> _sendMessage() async {
     final text = _controller.text.trim();
@@ -45,7 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<String?> _fetchGroqResponse(String userText) async {
     const url = 'https://api.groq.com/openai/v1/chat/completions';
     final headers = {
-      'Authorization': 'Bearer $_apiKey',
+      'Authorization': 'Bearer $apiKey',
       'Content-Type': 'application/json',
     };
     final body = jsonEncode({

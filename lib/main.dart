@@ -8,7 +8,10 @@ import 'Screens/alerts_screen.dart';
 import 'Screens/login_screen.dart';
 import 'Screens/splash_screen.dart';
 import 'Screens/chat_screen.dart';
-void main() {
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+void main() async {
+  await dotenv.load();
   runApp(const EconFlowApp());
 }
 
